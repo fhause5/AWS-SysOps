@@ -1,3 +1,3 @@
 ### Shared model
 
-![](sceens/shared.png)
+![](screens/shared.png)
