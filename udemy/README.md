@@ -3,11 +3,11 @@
 
 ## Function Reference
 PLAN:
-* [Compute](#Compute)
-* [Network](#Network)
-* [Troubleshooting](#Troubleshooting)
-* [Cloudwatch](#Cloudwatch)
-* [SSM&OpsWOrks](#SSM&OpsWOrks)
+* [Compute](Compute)
+* [Network](Network)
+* [Troubleshooting](Troubleshooting)
+* [Cloudwatch](Cloudwatch)
+* [SSM&OpsWOrks](SSM&OpsWOrks)
 
 
 <span style="color: black">&#x1F535; 
