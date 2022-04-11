@@ -3,15 +3,15 @@
 
 ## Function Reference
 PLAN:
-* [Compute](Compute)
-* [Network](Network)
-* [Troubleshooting](Troubleshooting)
-* [Cloudwatch](Cloudwatch)
-* [SSM&OpsWOrks](SSM&OpsWOrks)
+* [Compute](#Compute)
+* [Network](#Network)
+* [Troubleshooting](#Troubleshooting)
+* [Cloudwatch](#Cloudwatch)
+* [SSM&OpsWOrks](#SSM&OpsWOrks)
 
 
 <span style="color: black">&#x1F535; 
-Compute
+# Compute
 </span>
 
 * change instance type ONLY EBS: stop
@@ -47,7 +47,7 @@ upfront, no upfront
 
 
 <span style="color: black">&#x1F535; 
-Network
+# Network
 </span>
 
 ### enchanced network SR-IOV
@@ -62,7 +62,7 @@ ethtool -i eth0
 ```
 
 <span style="color: black">&#x1F535; 
-Troubleshooting
+# Troubleshooting
 </span>
 
 ### ec2 Terminates immediately
@@ -73,7 +73,7 @@ Troubleshooting
 
 
 <span style="color: black">&#x1F535; 
-Cloudwatch
+# Cloudwatch
 </span>
 
 
@@ -83,5 +83,5 @@ Cloudwatch
 
 
 <span style="color: black">&#x1F535; 
-SSM&OpsWOrks
+# SSM&OpsWOrks
 </span>
