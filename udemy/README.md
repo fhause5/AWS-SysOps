@@ -3,14 +3,16 @@
 
 ## Function Reference
 PLAN:
-* [ComputeQL](#Compute)
+* [Compute](#Compute)
 * [Network](#Network)
 * [Troubleshooting](#Troubleshooting)
 * [Cloudwatch](#Cloudwatch)
 * [SSM&OpsWOrks](#SSM&OpsWOrks)
 
 
-### <span style="color: black">&#x1F535; Compute
+<span style="color: black">&#x1F535; 
+Compute
+</span>
 
 * change instance type ONLY EBS: stop
 * burstable CPU credit- monitor CPU health if unlimited
@@ -43,7 +45,10 @@ upfront, no upfront
 * Spread- differant hardware 7 per AZ hight availability
 * Partition(Hadoop, Kafka, Cassandra) many AZ, no share hardware 
 
-### <span style="color: black">&#x1F535; Network
+
+<span style="color: black">&#x1F535; 
+Network
+</span>
 
 ### enchanced network SR-IOV
 
@@ -56,7 +61,9 @@ modinfo ena
 ethtool -i eth0
 ```
 
-### <span style="color: black">&#x1F535; Troubleshooting
+<span style="color: black">&#x1F535; 
+Troubleshooting
+</span>
 
 ### ec2 Terminates immediately
 
@@ -65,11 +72,16 @@ ethtool -i eth0
 * AMI is missing
 
 
-### <span style="color: black">&#x1F535; Cloudwatch
+<span style="color: black">&#x1F535; 
+Cloudwatch
+</span>
 
 
 * cloudwatch(procstat) agent for new METRICS: MEM, DIS and LOGS: nginx-error.log
 * status check: alarm, restart, scale
 * hibirnation(save RAM to DISK) RAM inside EBS volume, will fast starting (RAM loads from VOLUME)
 
-### <span style="color: black">&#x1F535; SSM&OpsWOrks
+
+<span style="color: black">&#x1F535; 
+SSM&OpsWOrks
+</span>
