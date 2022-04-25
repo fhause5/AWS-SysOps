@@ -5,3 +5,6 @@
 * InsufficientInstanceCapacity: not enought per AZ
 * out of CPU credits: Purchase CPU credits
 * AMI not used in regions
+
+* SSM standart/advanced: 10к\100кб 4кб\8кб
+* SSM param store: can use ttl for expires
