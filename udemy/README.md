@@ -903,3 +903,5 @@ VPN CloudHub
 ### Egress-only Internet Gateway
 
 * For ipv6
+
+kubectl -n cgbu-analytics--* exec -ut 
