@@ -28,7 +28,7 @@ PLAN:
 </span>
 
 * change instance type ONLY EBS: stop
-* burstable CPU credit- monitor CPU health if unlimited
+* burstable CPU credit- monitor CPU health if unlimited (T-type)
 
 
 ### types:
@@ -84,7 +84,9 @@ ethtool -i eth0
 # Cloudwatch
 </span>
 
-
+* By default CLoudwatch keep: 1 min-15 days, 5 min-63 days,  1 hour 455 days
+* 5 min period: alarm 4 min, evaluation period 1 min
+* agent > AWS metric > Alarm > SNS topic
 * cloudwatch(procstat) agent for new METRICS: MEM, DIS and LOGS: nginx-error.log
 * status check: alarm, restart, scale
 * hibirnation(save RAM to DISK) RAM inside EBS volume, will fast starting (RAM loads from VOLUME)
@@ -155,6 +157,8 @@ aws ssm get-parameters --name /app/dev /app/prod --with-decryption
 
 ### Autoscaling ASG
 
+* spread placement  regionally to specific hardware
+
 * Can be based on Cloudwatch alarms and custom metrics
 * Cloudwatch, Time, Predictable scaling
 * Adivice use ready-to-use AMI for quickly
@@ -170,6 +174,7 @@ LB/Elastic IP > ASG > instance
 
 # CloudFormation
 
+* 200 stack limit
 * Changes set preview
 * CloudFormation knows what tp create firstly
 * Not supported resource use AWS Lambda Custom Resources
@@ -185,6 +190,7 @@ cfn-signal -e $? --stack $P{AWS::StackId} --resource SampleWaitCondition exit1
 * Update policy: Replacing, Rolling, Scheduled
 * Prevent Update stack-policy.yaml add to Stack policy 
 * StackSets for multiple regions
+* Change set like terraform plan
 
 ```
 Conditions:
@@ -214,7 +220,7 @@ AvailabilityZone:
 
 # S3
 
-
+*  S3 Batch Operations job to copy each object in place with encryption enabled
 
 * SSE-S3 maanged by AWS, server side AES-256 HEADER x-ams
 * SSE-KMS managed by KMS, user control server side AES-256 HEADER:aws:kms
@@ -295,6 +301,7 @@ Access-Control-Allow-Methods: GET,PUT,DELETE
 # Cloudfront 
 </span>
 
+Amazon CloudFront globally
 CDN content delivery content
 Create Distribution > WEB >bucket > restrict access > Redirect HTTP to HTTPS
 
@@ -307,6 +314,7 @@ Create Distribution > WEB >bucket > restrict access > Redirect HTTP to HTTPS
 * CloudFront with ALB sticky sessions need to use whitelist
 * Cloudfron invalidation to appy imidiatelly
 
+
 Cloudfront Header value for all request
 vs Cache Behavior (Accept, Accept-datetime)
 
@@ -314,10 +322,15 @@ vs Cache Behavior (Accept, Accept-datetime)
 # RDS
 </span>
 
+
+
 * Force SSL connections rds.force_ssl-1 
 ```
 GRANT USAGE ON *.* to 'mysql'@'%' REQUIRE SSL;
 ```
+
+* Can't create an instance from DB snapshoot
+(create clone of snapshot, then create an instance)
 * restore point time 5 minutes
 * db snapshots manually by user
 * storage autoscaling increase storage on RDS DB all DB
@@ -329,8 +342,12 @@ GRANT USAGE ON *.* to 'mysql'@'%' REQUIRE SSL;
 
 ### Encryption
 
+* Server Side: request Amazon for encryption, decrypt after downloading (AWS SSE-KMS)
+* Client side: encrypt, upload data to s3
+
 * At rest encryption master with AWS KMS AES 256
 * In-flight encryption SSL in flight, enforce using SSL
+
 
 
 
@@ -451,13 +468,15 @@ updated AWS events
 
 ### AWS Config
 
-keep configuration evaliate compliance
+* AWS Config with the required-tags managed rule to evaluate all resources for the specified tags.
+* keep configuration evaliate compliance
 
 * Remediation actions
 * unrestricted SSH
 * public buckets
 * ALB changes
 * receive alert if smth change
+
 
 <span style="color: black">&#x1F535; 
 # Account-Managment
@@ -471,6 +490,7 @@ keep configuration evaliate compliance
 
 ### AWS Organization
 
+* Consolidated for centrelized biling
 * The main account
 * Member account part of AWS Organization
 * Single payment
@@ -629,6 +649,10 @@ LOGS can be stored in S3 and filter by Athena
 * Cloud trail
 * Push keys to repository deny
 
+### Cloud trail
+
+* Check events limit/resources breach
+
 ### AWS Macie
 
 * Protect sensitive data like PII personal identifiable information
@@ -670,8 +694,9 @@ Cloud HSM — это служба аппаратного модуля безоп
 * Secrets for: RDS, Redshift, other credentials
 * METRICS: Conceled, End Secret, Rotation
 
-# Identity
+# IAM
 
+* The only one IAM princepal Inline policy (applies to that principal)
 * IAM Credentials Report
 Report list of account to get not MFA users
 
@@ -762,6 +787,7 @@ Many IP in one record
 
 ### VPC
 
+* AWS VPC reserve 5 IP adress: первые 4 и последний
 * Default VPC has internet connectivity and public IP for all instances
 * Min.size /28 (16 IP)
 * Max.size /16 (65536)
@@ -807,6 +833,7 @@ Many IP in one record
 * instance level
 * support allow
 * eveluated before
+* ACCEPT/REJECT OK 
 
 ### NACL
 
@@ -905,3 +932,59 @@ VPN CloudHub
 * For ipv6
 
 kubectl -n cgbu-analytics--* exec -ut 
+
+
+### Unlimited ASG CPU
+
+* Unlimited mode for burstable performance instances can use MORE than actual CPU usage
+
+###  Placement group accross EC2
+
+* Cluster Placement Group is the way to go in order to reduce latency
+* In one Hardware for Clustering
+
+### Amazon FSx for Windows File Server Multi-AZ file system
+
+### AWS DataSync to migrate data to the new EFS file system
+
+### AWS SQS
+
+* DECOUPLE/разделить component
+* 256KB
+* FIFO/HA
+* multiple writes/readers
+* Retantions period: from 1min-14d
+* Long polling reduce time for empty response, 20sec/max
+* Visibility timeout period: 30sec-12h, scale if app need more time
+* InFLign Messages in Standart: 120k
+* InFLign Messages in FIFO Queue: 20k
+* Dead-Letter Queue: не получаеться обработать 
+
+### DirectConnect
+
+
+### Amazon Red shift
+
+
+### LOAP for authentication
+
+### SQS
+
+* Delete queue over 30 days consecutive intactive days
+
+# AWS SSO
+
+* Active directory connection
+* FIFO
+
+### aws-cli
+
+* aws cloudwatch list-metrics--namespaces AWS/EC2
+
+### AWS Mecie
+
+* Find sensetive data in S3 bucket
+
+### AWS Event bridge
+
+* event to logs, lambda
