@@ -91,6 +91,21 @@ ethtool -i eth0
 * status check: alarm, restart, scale
 * hibirnation(save RAM to DISK) RAM inside EBS volume, will fast starting (RAM loads from VOLUME)
 
+* Custom metrics
+
+```
+aws cloudwatch put-metric-data --metric-name Custom-test --namespace MyNameSpace --unit Bytes --value 116 --dimensions InstanceId=i-0892712e6a374cbc2,InstanceType=m1.small --region eu-central-1
+
+```
+
+* Log groups
+https://medium.com/tensult/to-send-linux-logs-to-aws-cloudwatch-17b3ea5f4863
+
+```
+sudo yum -y install polkit.x86_64
+
+```
+
 
 <span style="color: black">&#x1F535; 
 # SSM&OpsWOrks
@@ -242,11 +257,59 @@ AvailabilityZone:
 * Each Access Points have own DNS and access limits policy, can be INTERNET OR VPC
 * Allow access from source VPC policy: aws:SourceVpce
 
+### Make public
+
+* Create webhost
+
+```
+{
+  "Id": "Policy1662452043342",
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "Stmt1662452020967",
+      "Action": [
+        "s3:GetObject"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:aws:s3:::front-089-cors/*",
+      "Principal": "*"
+    }
+  ]
+}
+```
+
 ### CORS: browser based security
 
 ```
 Access-Control-Allow-Origin: https://www.example.com
 Access-Control-Allow-Methods: GET,PUT,DELETE
+```
+
+```
+Access to fetch at 'http://front-089-cors.s3-website.eu-central-1.amazonaws.com/extra-page.html' from origin 'http://front-089.s3-website.eu-central-1.amazonaws.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. If an opaque response serves your needs, set the request's mode to 'no-cors' to fetch the resource with CORS disabled.
+```
+
+### Allow cors
+
+
+```
+[
+    {
+        "AllowedHeaders": [
+            "Authorization"
+        ],
+        "AllowedMethods": [
+            "GET"
+        ],
+        "AllowedOrigins": [
+            "http://front-089.s3-website.eu-central-1.amazonaws.com"
+        ],
+        "ExposeHeaders": [],
+        "MaxAgeSeconds": 3000
+    }
+]
+
 ```
 
 ### MFA
@@ -655,7 +718,9 @@ LOGS can be stored in S3 and filter by Athena
 
 ### AWS Macie
 
+* My own PATERN in S3 bucket
 * Protect sensitive data like PII personal identifiable information
+* Identify private sensetive information for AWS S3 bucket: creditcard/passport/human names
 
 ### AWS KMS
 
@@ -987,4 +1052,40 @@ kubectl -n cgbu-analytics--* exec -ut
 
 ### AWS Event bridge
 
-* event to logs, lambda
+* Создает Рулы на основание ивента
+* event to logs, lambda, SNS
+
+### Api Gateway
+
+* FrontDoor
+* Create URL with GET/POST to LABMDA
+
+### AWS System Manager
+
+* Parameters store
+
+AWS System Managmer > Parameters store > key/values
+
+```
+DB_ENV=`aws ssm get-parameters --name DB_ENV --region us-east-1 --with-decription --output text --query Parameters[].Value`
+```
+
+* AWS System Managmer, run command
+
+```
+AWS System Managmer > managed instances with role/SSM agent > run command
+```
+
+* Inventory
+
+Statistics/OS/Network about Managed Instances
+
+* Hybrid Infastracture
+
+```
+Create Activation > Install SSM on Hybrid Infastracture
+```
+
+* Maintenance Windows
+
+* Add instances to managed instances

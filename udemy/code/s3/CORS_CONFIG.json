@@ -7,7 +7,7 @@
             "GET"
         ],
         "AllowedOrigins": [
-            "<url of first bucket with http://...without slash at the end>"
+            "http://front-089.s3-website.eu-central-1.amazonaws.com"
         ],
         "ExposeHeaders": [],
         "MaxAgeSeconds": 3000
