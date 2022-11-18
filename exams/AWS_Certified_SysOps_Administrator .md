@@ -305,7 +305,7 @@ AWS Glacier ( ~ $0.004 per GB / Month) is the most cost effective solution for d
 
 ```
 
-### 33. What sort of host might you set up in your AWS environment that can be used as a way to “hop” into your environment to gain access to secure servers within a private subnet?
+### 33. What sort of host might you set up in your AWS environment that can be used as a way to "hop" into your environment to gain access to secure servers within a private subnet?
 
 > Bastion host
 

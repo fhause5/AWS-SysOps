@@ -27,7 +27,7 @@
 
 ### DOCS
 
-https://d1.awsstatic.com/training-and-certification/docs-sysops-associate/AWS-Certified-SysOps-Administrator-Associate_Exam-Guide.pdf
+https://aws.amazon.com/certification/certified-sysops-admin-associate/
 
 
 

@@ -30,6 +30,7 @@ PLAN:
 * [aws-cli](#aws-cli)
 * [Athena](#Athena)
 * [Gateways](#Gateways)
+* [Snowball](#Snowball)
 
 <span style="color: black">&#x1F535; 
 # Compute
@@ -748,6 +749,8 @@ AWS
 Shared:
 Configuratiom, Training, Patching
 
+
+
 ### AWS Shield
 
 Free standart
@@ -1204,3 +1207,9 @@ AWS Virtual private gateway from AWS  >>>>>> AWS Customer Gateway from PREMISE
 ### AWS Virtual private gateway
 
 A virtual private gateway is the VPN endpoint on the Amazon side of your Site-to-Site VPN connection that can be attached to a single VPC.
+
+<span style="color: black">&#x1F535; 
+# Snowball
+</span>
+
+* Migrate 50TB of data with storage opptimized
